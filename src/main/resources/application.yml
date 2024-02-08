@@ -1,0 +1,72 @@
+security:
+  oauth2:
+    resource:
+      filter-order: 3
+debug: true
+---
+
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    url: jdbc:h2:mem:localdb
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+customer:
+  client:
+    id : local-customer
+    secret: $2a$12$hJOEPAx7rPJvqsrPIscjQOwkP.d1OH//EGYo3lq6Gqx57hYbJ.Xdy
+partner:
+  client:
+    id: local-partner
+    secret: $2a$12$hJOEPAx7rPJvqsrPIscjQOwkP.d1OH//EGYo3lq6Gqx57hYbJ.Xdy
+admin:
+  client:
+    id: local-admin
+    secret: $2a$10$5lI9OvVh27q7Bkn7hg2Tv.GCTPHwJGJT1yQ2jBJmqVgrF2Az/AeBu
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+customer:
+  client:
+    id : dev-customer
+    secret: $2a$12$hJOEPAx7rPJvqsrPIscjQOwkP.d1OH//EGYo3lq6Gqx57hYbJ.Xdy
+partner:
+  client:
+    id: dev-partner
+    secret: $2a$12$hJOEPAx7rPJvqsrPIscjQOwkP.d1OH//EGYo3lq6Gqx57hYbJ.Xdy
+admin:
+  client:
+    id: dev-admin
+    secret: $2a$10$5lI9OvVh27q7Bkn7hg2Tv.GCTPHwJGJT1yQ2jBJmqVgrF2Az/AeBu
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: test
+customer:
+  client:
+    id : test-customer
+    secret: $2a$12$hJOEPAx7rPJvqsrPIscjQOwkP.d1OH//EGYo3lq6Gqx57hYbJ.Xdy
+partner:
+  client:
+    id: test-partner
+    secret: $2a$12$hJOEPAx7rPJvqsrPIscjQOwkP.d1OH//EGYo3lq6Gqx57hYbJ.Xdy
+admin:
+  client:
+    id: test-admin
+    secret: $2a$12$hJOEPAx7rPJvqsrPIscjQOwkP.d1OH//EGYo3lq6Gqx57hYbJ.Xdy
