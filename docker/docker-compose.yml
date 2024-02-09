@@ -18,7 +18,7 @@ services:
       - postgres
     build:
       context: ..
-      dockerfile: ./Dockerfile
+      dockerfile: ./Dockerfile.compose
     restart: on-failure
     env_file: .env
     ports:
