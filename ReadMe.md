@@ -3,7 +3,7 @@
 
 The application use **Java 17** runtime and **Postgresql** as database.  
 **Flywaydb** is used for database migration.  
-We have three spring profiles for this application : "**local**", "**dev**"  and "**test**".  
+We have two spring profiles for this application : "**local**" and "**dev**".  
 
 # Run Locally
 ***
@@ -19,16 +19,12 @@ We have three spring profiles for this application : "**local**", "**dev**"  and
 
 # Docker Compose
 ***
-To spin up the application in dev or test environment, use docker compose script.  
-Set the spring profile value in **.env** file inside parameter **SPRING_PROFILE**
+To spin up the application with actual postgre database, use docker compose script.  
+Set the spring profile value as **dev** inside **docker/.env** file for the parameter **SPRING_PROFILE**.  
+Execute below commands inside **docker** folder where **docker-compose.yml** is present.
+
 ### The services can be run on the background with command:
 `docker compose up -d`
-
-### To check the current working containers:
-`docker ps`
-
-### To check the current working images:
-`docker images`
 
 ### To stop all the running containers:
 `docker compose down`
@@ -36,4 +32,5 @@ Set the spring profile value in **.env** file inside parameter **SPRING_PROFILE*
 ### To stop and remove all containers, networks, and all images used by any service in docker-compose.yml:
 `docker compose down --rmi all`
 
-> To recreate the database, delete the postgres folder in parent directory.
+> While spinning up initially, the postgres datafiles are created inside the docker folder. This data files will be reused on the subsequent docker compose. If we want to recreate the database, delete the postgres folder in docker directory manually, before every compose.
+
