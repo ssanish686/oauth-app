@@ -7,7 +7,7 @@ services:
     ports:
       - $SQLDB_LOCAL_PORT:$SQLDB_DOCKER_PORT
     volumes:
-      - postgres:/var/lib/postgresql/data
+      - ./postgres:/var/lib/postgresql/data
     environment:
       - POSTGRES_PASSWORD=$SQLDB_ROOT_PASSWORD
       - POSTGRES_USER=$SQLDB_USER
