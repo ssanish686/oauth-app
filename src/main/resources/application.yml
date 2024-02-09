@@ -57,16 +57,16 @@ admin:
 spring:
   config:
     activate:
-      on-profile: test
+      on-profile: prod
 customer:
   client:
-    id : test-customer
+    id : customer
     secret: $2a$12$hJOEPAx7rPJvqsrPIscjQOwkP.d1OH//EGYo3lq6Gqx57hYbJ.Xdy
 partner:
   client:
-    id: test-partner
+    id: partner
     secret: $2a$12$hJOEPAx7rPJvqsrPIscjQOwkP.d1OH//EGYo3lq6Gqx57hYbJ.Xdy
 admin:
   client:
-    id: test-admin
+    id: admin
     secret: $2a$12$hJOEPAx7rPJvqsrPIscjQOwkP.d1OH//EGYo3lq6Gqx57hYbJ.Xdy
