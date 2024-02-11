@@ -1,0 +1,89 @@
+# config map
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.postgres.config.name }}
+  labels:
+    app: {{ .Values.postgres.name }}
+data:
+  {{- range .Values.postgres.config.data }}
+  {{ .key }}: {{ .value }}
+  {{- end}}
+
+---
+# PersistentVolume
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Values.postgres.volume.pv.name }}
+  labels:
+    type: {{ .Values.postgres.volume.pv.type }}
+    app: {{ .Values.postgres.name }}
+spec:
+  storageClassName: {{ .Values.postgres.volume.storage.class.name }}
+  capacity:
+    storage: {{ .Values.postgres.volume.storage.value }}
+  accessModes:
+    - {{ .Values.postgres.volume.accessMode }}
+  hostPath:
+    path: {{ .Values.postgres.volume.path }}
+
+---
+#PersistentVolume Claim
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.postgres.volume.pvc.name }}
+  labels:
+    app:  {{ .Values.postgres.name }}
+spec:
+  storageClassName: {{ .Values.postgres.volume.storage.class.name }}
+  accessModes:
+    - {{ .Values.postgres.volume.accessMode }}
+  resources:
+    requests:
+      storage: {{ .Values.postgres.volume.storage.value }}
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.postgres.name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.postgres.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.postgres.name }}
+    spec:
+      containers:
+        - name: {{ .Values.postgres.name }}
+          image: {{ .Values.postgres.container.image }}
+          ports:
+            - containerPort: {{ .Values.postgres.container.port }}
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.postgres.config.name }}
+          volumeMounts:
+            - mountPath: {{ .Values.postgres.volume.mountPath }}
+              name:  {{ .Values.postgres.volume.name }}
+      volumes:
+        - name: {{ .Values.postgres.volume.name }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.postgres.volume.pvc.name }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.postgres.name }}
+  labels:
+    app: {{ .Values.postgres.name }}
+spec:
+  type:  {{ .Values.postgres.service.type }}
+  ports:
+    - port: {{ .Values.postgres.service.port }}
+  selector:
+    app: {{ .Values.postgres.name }}

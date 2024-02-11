@@ -3,6 +3,13 @@ security:
     resource:
       filter-order: 3
 debug: true
+management:
+  server:
+    port: 9001
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 ---
 
 spring:
@@ -39,6 +46,14 @@ spring:
   config:
     activate:
       on-profile: dev
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 customer:
   client:
     id : dev-customer
@@ -57,16 +72,24 @@ admin:
 spring:
   config:
     activate:
-      on-profile: test
+      on-profile: prod
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 customer:
   client:
-    id : test-customer
+    id : customer
     secret: $2a$12$hJOEPAx7rPJvqsrPIscjQOwkP.d1OH//EGYo3lq6Gqx57hYbJ.Xdy
 partner:
   client:
-    id: test-partner
+    id: partner
     secret: $2a$12$hJOEPAx7rPJvqsrPIscjQOwkP.d1OH//EGYo3lq6Gqx57hYbJ.Xdy
 admin:
   client:
-    id: test-admin
+    id: admin
     secret: $2a$12$hJOEPAx7rPJvqsrPIscjQOwkP.d1OH//EGYo3lq6Gqx57hYbJ.Xdy
