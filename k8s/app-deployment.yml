@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oauth-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oauth-app
+  template:
+    metadata:
+      labels:
+        app: oauth-app
+    spec:
+      containers:
+        - name: oauth-app-container
+          image: ssanish686/oauth-app:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: webapp
+            - containerPort: 9001
+              name: actuator
+          env:
+            - name: DATABASE_URL
+              value: jdbc:postgresql://postgres:$SQLDB_DOCKER_PORT/$SQLDB_DATABASE?useSSL=false
+            - name: DATABASE_USERNAME
+              value: oauth-user
+            - name: DATABASE_PASSWORD
+              value: Z%Sdf$3*dsfd90123#Vgt7@544
+            - name: SPRING_PROFILES_ACTIVE
+              value : prod
+
+# service type loadbalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: oauth-app-svc
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+      protocol: TCP
+    - name: management
+      port: 9001
+      targetPort: 9001
+      protocol: TCP
+  type: LoadBalancer
+  selector:
+    app: oauth-app

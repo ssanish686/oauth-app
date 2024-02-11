@@ -19,18 +19,15 @@ services:
     build:
       context: ..
       dockerfile: ./Dockerfile.compose
-    restart: on-failure
+    restart: no
     env_file: .env
     ports:
       - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
+      - $SPRING_MANAGEMENT_LOCAL_PORT:$SPRING_MANAGEMENT_DOCKER_PORT
     environment:
-      SPRING_APPLICATION_JSON: '{
-        "spring.datasource.url"  : "jdbc:postgresql://postgres:$SQLDB_DOCKER_PORT/$SQLDB_DATABASE?useSSL=false",
-        "spring.datasource.username" : "$SQLDB_USER",
-        "spring.datasource.password" : "$SQLDB_ROOT_PASSWORD",
-        "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.PostgreSQLDialect",
-        "spring.jpa.hibernate.ddl-auto" : "none"
-      }'
+      DATABASE_URL: jdbc:postgresql://postgres:$SQLDB_DOCKER_PORT/$SQLDB_DATABASE?useSSL=false
+      DATABASE_USERNAME: $SQLDB_USER
+      DATABASE_PASSWORD: $SQLDB_ROOT_PASSWORD
       SPRING_PROFILES_ACTIVE: $SPRING_PROFILE
     volumes:
       - .m2:/root/.m2
