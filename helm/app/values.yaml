@@ -1,0 +1,15 @@
+replicaCount: 1
+
+app:
+  name: oauth-app
+  deployment:
+    name: oauth-app-deployment
+  container:
+    name: oauth-app-container
+    image:
+      name : ssanish686/oauth-app:latest
+      pull :
+        policy : Always
+  service:
+    name: oauth-app-svc
+    type: LoadBalancer

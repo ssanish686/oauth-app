@@ -1,0 +1,9 @@
+postgres:
+  config:
+    data:
+      - key: POSTGRES_DB
+        value: oauth-db
+      - key: POSTGRES_USER
+        value: oauth-user
+      - key: POSTGRES_PASSWORD
+        value: Z%Sdf$3*dsfd90123#Vgt7@544

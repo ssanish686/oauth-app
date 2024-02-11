@@ -1,0 +1,16 @@
+app:
+  port:
+    http:
+      port : 80
+      targetPort : 8080
+    management:
+      port : 9001
+      targetPort : 9001
+  env:
+    spring:
+      profiles:
+        active: prod
+    database:
+      url: jdbc:postgresql://postgres:5432/oauth-db?useSSL=false
+      username: oauth-user
+      password: Z%Sdf$3*dsfd90123#Vgt7@544
