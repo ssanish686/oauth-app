@@ -20,6 +20,9 @@ spring:
     url: jdbc:h2:mem:localdb
     username: sa
     password:
+  h2:
+    console:
+      enabled: true
   jpa:
     hibernate:
       ddl-auto: validate
@@ -27,18 +30,14 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
-customer:
-  client:
-    id : local-customer
-    secret: $2a$12$hJOEPAx7rPJvqsrPIscjQOwkP.d1OH//EGYo3lq6Gqx57hYbJ.Xdy
-partner:
-  client:
-    id: local-partner
-    secret: $2a$12$hJOEPAx7rPJvqsrPIscjQOwkP.d1OH//EGYo3lq6Gqx57hYbJ.Xdy
 admin:
   client:
     id: local-admin
     secret: $2a$10$5lI9OvVh27q7Bkn7hg2Tv.GCTPHwJGJT1yQ2jBJmqVgrF2Az/AeBu
+user:
+  client:
+    id: local-user
+    secret: $2a$10$fd3Te4dtTlCpdDS6owliY.Xhae4vbp/mYvEoR5mZNP93lKUqGPPRq
 
 ---
 
@@ -54,18 +53,14 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-customer:
-  client:
-    id : dev-customer
-    secret: $2a$12$hJOEPAx7rPJvqsrPIscjQOwkP.d1OH//EGYo3lq6Gqx57hYbJ.Xdy
-partner:
-  client:
-    id: dev-partner
-    secret: $2a$12$hJOEPAx7rPJvqsrPIscjQOwkP.d1OH//EGYo3lq6Gqx57hYbJ.Xdy
 admin:
   client:
     id: dev-admin
     secret: $2a$10$5lI9OvVh27q7Bkn7hg2Tv.GCTPHwJGJT1yQ2jBJmqVgrF2Az/AeBu
+user:
+  client:
+    id: dev-user
+    secret: $2a$10$fd3Te4dtTlCpdDS6owliY.Xhae4vbp/mYvEoR5mZNP93lKUqGPPRq
 
 ---
 
@@ -81,15 +76,11 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-customer:
-  client:
-    id : customer
-    secret: $2a$12$hJOEPAx7rPJvqsrPIscjQOwkP.d1OH//EGYo3lq6Gqx57hYbJ.Xdy
-partner:
-  client:
-    id: partner
-    secret: $2a$12$hJOEPAx7rPJvqsrPIscjQOwkP.d1OH//EGYo3lq6Gqx57hYbJ.Xdy
 admin:
   client:
     id: admin
     secret: $2a$12$hJOEPAx7rPJvqsrPIscjQOwkP.d1OH//EGYo3lq6Gqx57hYbJ.Xdy
+user:
+  client:
+    id: user
+    secret: $2a$10$fd3Te4dtTlCpdDS6owliY.Xhae4vbp/mYvEoR5mZNP93lKUqGPPRq

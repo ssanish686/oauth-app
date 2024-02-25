@@ -14,18 +14,15 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 @Configuration
 public class OAuthServerConfig extends AuthorizationServerConfigurerAdapter{
-	@Value("${customer.client.id}")
-	private String customerClientId;
-	@Value("${customer.client.secret}")
-	private String customerClientSecret;
-	@Value("${partner.client.id}")
-	private String partnerClientId;
-	@Value("${partner.client.secret}")
-	private String partnerClientSecret;
 	@Value("${admin.client.id}")
 	private String adminClientId;
 	@Value("${admin.client.secret}")
 	private String adminClientSecret;
+
+	@Value("${user.client.id}")
+	private String userClientId;
+	@Value("${user.client.secret}")
+	private String userClientSecret;
 
 
 	private String privateKey = "-----BEGIN RSA PRIVATE KEY-----\r\n"
@@ -106,16 +103,11 @@ public class OAuthServerConfig extends AuthorizationServerConfigurerAdapter{
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		// three clients
-		clients.inMemory().withClient(customerClientId).secret(customerClientSecret).scopes("read", "write")
-				.authorizedGrantTypes("password", "refresh_token").accessTokenValiditySeconds(20000)
-				.refreshTokenValiditySeconds(20000)
-				.and()
-				.withClient(partnerClientId).secret(partnerClientSecret).scopes("read", "write")
-				.authorizedGrantTypes("password", "refresh_token").accessTokenValiditySeconds(20000)
-				.refreshTokenValiditySeconds(20000)
+		clients.inMemory().withClient(userClientId).secret(userClientSecret).scopes("user")
+				.authorizedGrantTypes("password", "refresh_token").accessTokenValiditySeconds(36000)
+				.refreshTokenValiditySeconds(72000)
 				.and()
 				.withClient(adminClientId).secret(adminClientSecret).scopes("admin")
-				.authorizedGrantTypes("client_credentials").accessTokenValiditySeconds(20000)
-				.refreshTokenValiditySeconds(20000);
+				.authorizedGrantTypes("client_credentials").accessTokenValiditySeconds(7200);
 	}
 }

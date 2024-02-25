@@ -7,6 +7,7 @@ import com.anish.entity.Authority;
 import com.anish.entity.UserAuthorities;
 import com.anish.entity.UserAuthoritiesPk;
 import com.anish.entity.UserDetails;
+import com.anish.exception.UnknownAuthorityException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -55,7 +56,7 @@ public class UserService {
     {
         return requestDto.getRoles().stream().map(
                 role -> {
-                    Authority authority = authorityRepository.findByName(role).orElseThrow(() -> new RuntimeException("Invalid role name"));
+                    Authority authority = authorityRepository.findByName(role).orElseThrow(() -> new UnknownAuthorityException(String.format("Invalid role name : %s", role)));
                     UserAuthorities u = new UserAuthorities();
                     UserAuthoritiesPk pk = new UserAuthoritiesPk();
                     pk.setAuthorityId(authority.getId());

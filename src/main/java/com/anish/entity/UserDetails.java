@@ -1,12 +1,13 @@
 package com.anish.entity;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-@Entity(name = "user_details")
+@Entity
 @Data
 public class UserDetails {
 
@@ -24,7 +25,8 @@ public class UserDetails {
     private Date updatedTime;
     private String updatedBy;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "authority", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "userDetails", cascade = CascadeType.ALL)
     private List<UserAuthorities> userAuthorities;
 
 }

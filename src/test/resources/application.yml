@@ -1,0 +1,21 @@
+debug: true
+spring:
+  datasource:
+    url: jdbc:h2:mem:localdb
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+user:
+  client:
+    id: local-user
+    secret: $2a$10$fd3Te4dtTlCpdDS6owliY.Xhae4vbp/mYvEoR5mZNP93lKUqGPPRq
+admin:
+  client:
+    id: test-admin
+    secret: $2a$10$5lI9OvVh27q7Bkn7hg2Tv.GCTPHwJGJT1yQ2jBJmqVgrF2Az/AeBu

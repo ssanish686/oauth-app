@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Date;
 
-@Entity(name = "authority")
+@Entity
 @Data
 public class Authority {
 

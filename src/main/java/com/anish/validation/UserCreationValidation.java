@@ -2,7 +2,7 @@ package com.anish.validation;
 
 import com.anish.dao.UserDetailsRepository;
 import com.anish.dto.request.UserCreationRequestDto;
-import com.anish.validation.exception.UserAlreadyExistsException;
+import com.anish.exception.UserAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -21,7 +21,6 @@ public class PrivilegedUserController {
 
     @Autowired
     private UserService userService;
-
     @Autowired
     private UserCreationValidation userCreationValidation;
 

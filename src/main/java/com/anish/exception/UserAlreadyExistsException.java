@@ -1,4 +1,4 @@
-package com.anish.validation.exception;
+package com.anish.exception;
 
 import lombok.experimental.StandardException;
 

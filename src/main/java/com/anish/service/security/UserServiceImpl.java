@@ -1,6 +1,9 @@
 package com.anish.service.security;
 
+import com.anish.dao.AuthorityRepository;
 import com.anish.dao.UserDetailsRepository;
+import com.anish.entity.Authority;
+import com.anish.entity.UserAuthorities;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.io.Serial;
 import java.util.Collection;
 import java.util.List;
@@ -24,8 +28,9 @@ public class UserServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         log.info("userName : {}", userName);
-        com.anish.entity.UserDetails userDetails = userDetailsRepository.findByUserName(userName).orElseThrow(() -> new UsernameNotFoundException("User Not Found."));
-        List<SimpleGrantedAuthority> authorities = userDetails.getUserAuthorities().stream().map(ua -> new SimpleGrantedAuthority(ua.getAuthority().getName())).toList();
+        com.anish.entity.UserDetails userDetails = userDetailsRepository.findByUserName(userName.toLowerCase()).orElseThrow(() -> new UsernameNotFoundException("User Not Found."));
+        List<SimpleGrantedAuthority> authorities = userDetails.getUserAuthorities().stream().map(ua ->
+            new SimpleGrantedAuthority(ua.getAuthority().getName())).toList();
         return new CustomUser(userName, userDetails.getPassword(),
                 authorities);
     }
