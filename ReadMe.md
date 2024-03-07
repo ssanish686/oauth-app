@@ -5,7 +5,7 @@ The application use **Java 17** runtime, **Springboot 2.5.1** and **Postgresql**
 **Flywaydb** is used for database migration.  
 We have three spring profiles for this application : "**local**", "**dev**" and "**prod**".  
 
-## Run Locally
+# Run Locally
 ***
 
 1. #### First set the environment variable  
@@ -17,7 +17,7 @@ We have three spring profiles for this application : "**local**", "**dev**" and 
 
 >For local, we use embedded H2 database.
 
-## Docker Compose
+# Docker Compose
 ***
 To spin up the application with actual postgre database, use docker compose script.  
 Currently **dev** profile is used for docker compose.  
@@ -40,7 +40,7 @@ The actuator can be accessed via below link.
 
 > http://<*hostname*>:9001/actuator
  
-## Deployment Steps
+# Deployment Steps
 ***
 
 > Make sure kubeconfig is configured with the correct cluster name.  
@@ -48,7 +48,7 @@ The actuator can be accessed via below link.
 #### For eks run below command to configure the kubeconfig.  
 `aws eks update-kubeconfig --region <regionName> --name <clusterName>`
 
-### Postgres Deployment
+# Postgres Deployment
 ***
 
 1. #### To deploy the postgres in kubernetes cluster, run below command in **k8s** folder.  
@@ -59,7 +59,7 @@ The actuator can be accessed via below link.
 
    `kubectl exec -it <postgres pod name> -- psql -h localhost -U <db user name> --password -p 5432 <db name>`
 
-### Application Deployment
+# Application Deployment
 ***
 1. #### Build the application 
    `mvn clean install`
@@ -84,7 +84,7 @@ The actuator can be accessed via below link.
 7. #### Check actuator to see if the app is up and running
    `http://{{oauth-app-host}}:{{oauth-management-port}}/actuator/health`
 
-## Deployment Steps Using Helm
+# Deployment Steps Using Helm
 ***
 
 Helm provide more convenient way to deploy the application to different environment. 
@@ -95,13 +95,14 @@ values in deployment.yml file. Here helm can be really helpful.
 1. #### To deploy the postgres in kubernetes cluster, run below command in ***helm*** folder.
    `helm install -f prod-postgres-values.yml postgres ./postgres`
 
-2. #### To deploy the application in kubernetes cluster, run below command in ***helm*** folder.
+2. #### To deploy the application in kubernetes cluster, first make sure the application docker image is present as specified [here](#application_deployment) , then run below command in ***helm*** folder.
    `helm install -f prod-app-values.yml app ./app`
 
 3. #### To check te status of deployment.
    `helm list`
 
-## Commands to remember
+# Commands to remember
+***
 
 #### To show all service
 
@@ -144,6 +145,10 @@ values in deployment.yml file. Here helm can be really helpful.
 
 #### To show the charts installed
 `helm list`
+
+#### To install a chart
+
+`helm install -f <values yml file> <chart installation name> ./<chart directory>`
 
 #### To uninstall a chart which is installed
 `helm uninstall <chart name>`

@@ -12,4 +12,3 @@ app:
         policy : Always
   service:
     name: oauth-app-svc
-    type: LoadBalancer

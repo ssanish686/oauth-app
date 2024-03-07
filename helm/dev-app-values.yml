@@ -1,7 +1,7 @@
 app:
   port:
     http:
-      port : 80
+      port : 8080
       targetPort : 8080
     management:
       port : 9001
@@ -9,10 +9,10 @@ app:
   env:
     spring:
       profiles:
-        active: prod
+        active: dev
     database:
       url: jdbc:postgresql://postgres:5432/oauth-db?useSSL=false
       username: oauth-user
       password: Z%Sdf$3*dsfd90123#Vgt7@544
   service:
-    type: LoadBalancer
+    type: NodePort
