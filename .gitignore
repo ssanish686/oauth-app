@@ -10,6 +10,7 @@ docker/.m2/
 .idea/jarRepositories.xml
 .idea/compiler.xml
 .idea/libraries/
+.idea/*.xml
 *.iws
 *.iml
 *.ipr
