@@ -67,6 +67,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: {{ .Values.postgres.config.name }}
+            - secretRef:
+                name: {{ .Values.postgres.secret.name }}
           volumeMounts:
             - mountPath: {{ .Values.postgres.volume.mountPath }}
               name:  {{ .Values.postgres.volume.name }}

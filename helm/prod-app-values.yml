@@ -12,7 +12,7 @@ app:
         active: prod
     database:
       url: jdbc:postgresql://postgres:5432/oauth-db?useSSL=false
-      username: oauth-user
-      password: Z%Sdf$3*dsfd90123#Vgt7@544
+      secret:
+        name: oauth-db-secret
   service:
     type: LoadBalancer

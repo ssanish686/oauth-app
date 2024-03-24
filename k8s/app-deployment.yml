@@ -25,11 +25,20 @@ spec:
             - name: DATABASE_URL
               value: jdbc:postgresql://postgres:$SQLDB_DOCKER_PORT/$SQLDB_DATABASE?useSSL=false
             - name: DATABASE_USERNAME
-              value: oauth-user
+              valueFrom:
+                secretKeyRef:
+                  name: oauth-db-secret
+                  key: POSTGRES_USER
             - name: DATABASE_PASSWORD
-              value: Z%Sdf$3*dsfd90123#Vgt7@544
+              valueFrom:
+                secretKeyRef:
+                  name: oauth-db-secret
+                  key: POSTGRES_PASSWORD
             - name: SPRING_PROFILES_ACTIVE
               value : prod
+          envFrom:
+            - secretRef:
+                name: oauth-rsa-secret
 
 # service type loadbalancer
 ---

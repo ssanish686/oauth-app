@@ -25,11 +25,20 @@ spec:
             - name: DATABASE_URL
               value: {{ .Values.app.env.database.url }}
             - name: DATABASE_USERNAME
-              value: {{ .Values.app.env.database.username }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.app.env.database.secret.name }}
+                  key: POSTGRES_USER
             - name: DATABASE_PASSWORD
-              value: {{ .Values.app.env.database.password }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.app.env.database.secret.name }}
+                  key: POSTGRES_PASSWORD
             - name: SPRING_PROFILES_ACTIVE
               value : {{ .Values.app.env.spring.profiles.active }}
+          envFrom:
+            - secretRef:
+                name: oauth-rsa-secret
 
 
 # service type loadbalancer

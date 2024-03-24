@@ -51,7 +51,11 @@ The actuator can be accessed via below link.
 # Postgres Deployment
 ***
 
-1. #### To deploy the postgres in kubernetes cluster, run below command in **k8s** folder.  
+1. #### Add postgres secrets in the kubernetes
+
+   `kubectl create secret generic <secret name> --from-literal=POSTGRES_USER=<db user name> --from-literal=POSTGRES_PASSWORD=<db password>`
+
+2. #### Run below command in **k8s** folder to deploy postgres.  
 
    `kubectl apply -f database-deployment.yml`
 
@@ -70,18 +74,25 @@ The actuator can be accessed via below link.
 3. #### Push the docker Image to docker hub 
    `docker push ssanish686/oauth-app:latest`
 
-4. #### To deploy the application in kubernetes cluster, run below command in **K8S** folder.
+4. #### Add the secrets in the kubernetes
+   We store oauth rsa private and public key in the secrets.
+
+   `kubectl create secret generic <secret name> --from-file=<key name inside which the value is stored in K8S>=<local file path where the value is present>`  
+
+   `Example : kubectl create secret generic oauth-rsa-secret --from-file=OAUTH_SIGNING_KEY=/c/Users/ssani/keys/oauth_rsa --from-file=OAUTH_VERIFIER_KEY=/c/Users/ssani/keys/oauth_rsa.pub`   
+
+5. #### To deploy the application in kubernetes cluster, run below command in **K8S** folder.
 
    `kubectl apply -f app-deployment.yml`
 
-5. #### Use below command to check the logs 
+6. #### Use below command to check the logs 
    `kubectl logs <app pod name>`
 
-6. #### We are using LoadBalancer service for the app. Run below command to see the LoadBalancer details.
+7. #### We are using LoadBalancer service for the app. Run below command to see the LoadBalancer details.
    ` kubectl describe svc <app service name>`  
      Hostname is present in the field : ***LoadBalancer Ingress***
 
-7. #### Check actuator to see if the app is up and running
+8. #### Check actuator to see if the app is up and running
    `http://{{oauth-app-host}}:{{oauth-management-port}}/actuator/health`
 
 # Deployment Steps Using Helm
@@ -92,11 +103,13 @@ In the above case since we are deploying only to PROD, It's ok to use deployment
 But in case if we have quite a lot of environment (DEV, QA, UAT, PROD), it will become cumbersome activity to change 
 values in deployment.yml file. Here helm can be really helpful.
 
-1. #### To deploy the postgres in kubernetes cluster, run below command in ***helm*** folder.
-   `helm install -f prod-postgres-values.yml postgres ./postgres`
+1. #### To deploy the postgres in kubernetes cluster, first make sure the postgres secrets are added to K8S as specified [here](#add-postgres-secrets-in-the-kubernetes).  
+   Run below command in ***helm*** folder.  
+   `helm install -f prod-postgres-values.yml oauth-db ./postgres`
 
-2. #### To deploy the application in kubernetes cluster, first make sure the application docker image is present as specified [here](#application_deployment) , then run below command in ***helm*** folder.
-   `helm install -f prod-app-values.yml app ./app`
+2. #### To deploy the application in kubernetes cluster, first make sure the application docker image is pushed to docker hub as specified in [Application Deployment Section](#application-deployment) and the secrets are added to K8S as specified [here](#add-the-secrets-in-the-kubernetes)
+   Run below command in ***helm*** folder.  
+   `helm install -f prod-app-values.yml oauth-app ./app`
 
 3. #### To check te status of deployment.
    `helm list`
@@ -139,6 +152,19 @@ values in deployment.yml file. Here helm can be really helpful.
 #### To see values in a config map
 
 `kubectl describe cm <configmap name>`
+
+#### To show all secrets 
+
+`kubectl get secrets`
+
+#### To delete a secret
+
+`kubectl delete secret <secret name>`
+
+#### To see the values in a secret
+
+`kubectl get secret <secret-name> -o jsonpath='{.data}'`
+>The value will be displayed in base64. Decode it to see the actual value.  
 
 #### To create a helm chart
 `helm create <chart name>`

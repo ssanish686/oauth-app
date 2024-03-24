@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests().antMatchers("/actuator","/actuator/**","/h2-console/**").permitAll()
+		http.csrf().disable().authorizeRequests()
 				.anyRequest().authenticated().and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.NEVER);
 	}
@@ -50,6 +50,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring()
-				.antMatchers("/h2-console/**");
+				.antMatchers("/actuator/**", "/h2-console/**");
 	}
 }

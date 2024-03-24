@@ -17,6 +17,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 	private static final String ADMIN_SCOPE = "#oauth2.hasScope('admin')";
 	private static final String PRIVILEGED_CLIENT_PATTERN = "/privileged-client/**";
+	private static final String PUBLIC_URL = "/public/**";
 	/*
 	 * private static final String RESOURCE_ID = "resource_id";
 	 * 
@@ -27,7 +28,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http.requestMatchers()
-				.antMatchers(PRIVILEGED_CLIENT_PATTERN).and().authorizeRequests()
+				.antMatchers(PRIVILEGED_CLIENT_PATTERN, PUBLIC_URL).and().authorizeRequests()
 				.antMatchers(PRIVILEGED_CLIENT_PATTERN).access(ADMIN_SCOPE);
 	}
 

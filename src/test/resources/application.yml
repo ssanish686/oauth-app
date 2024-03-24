@@ -13,9 +13,31 @@ spring:
         format_sql: true
 user:
   client:
-    id: local-user
+    id: test-user
     secret: $2a$10$fd3Te4dtTlCpdDS6owliY.Xhae4vbp/mYvEoR5mZNP93lKUqGPPRq
 admin:
   client:
     id: test-admin
     secret: $2a$10$5lI9OvVh27q7Bkn7hg2Tv.GCTPHwJGJT1yQ2jBJmqVgrF2Az/AeBu
+jwt:
+  signing-key: "-----BEGIN RSA PRIVATE KEY-----\n
+MIICXAIBAAKBgQDH/j3PlnMCBEItbOmio+9OdYHpdKXc5Bgevx88Ed3N1YODi/9a\n
+qXTbONIzNjkOotqKx8KbC6z06aI5jMS9r1+p5SUgQyGYCgqYiVujKXm22na/Jy5U\n
+Ogr0OyEBPczUO2IYBzG95QhPtTx0/5IULXd9LWwK4yaCtgc3jQ8WR12s+wIDAQAB\n
+AoGAGHfAdC9B7tM6jXgvtVg9JOo3dKpyyG2XjdtwJNdCvbYLmwJ7wUnOJCv1e5J8\n
+tI+0ERqTcoihJm2XDVdtko9sMpN9qT3i0EGIxMwV81cUrQt+EfsOEf6LEwgkLkh/\n
+OPr4yUed3TLwIHMFG21Azg65UIyrqsnHtSuz+DwoZgitH2ECQQDxM0ObUoBnEYqX\n
+BUfvN6hTB9+hLcxTN1i+MoNpS4QOqmSiL8z+P2gzIh1YIaps4AdagCLcQIn15RIr\n
++9+oJB7ZAkEA1EOzzUp1TYAZmuTm6YsKX3y/LRzJJKtT3cNPo+0ejVbzTUfGF5ew\n
+z4LMDXlf/1GPjvix5PmLkzS67TguGEJt8wJBAO6rDF3YUCgsyldPqXODPnMSmm1x\n
+1PoPDSf+8duyFrUwVC3MYOrAMUpPmnvHrEzZjU0298e7sQf5KHcPX6uQOlkCQE5n\n
+H2+xk/hnW43SBNS4rcEtY7P3EPjBa73a2XzUJdfRCRc/bpTiS8WqK1LCxUmaR6to\n
+gtTvs7VQ4cajXKtLRi8CQBmKoB5yDMJnqcsi3woGwoUyfcIVLC82dsw0w3RJSk0k\n
+cgAduBLaCe5VoCHq+ew4RME7n6WavEzH6wZ5FrOh1jI=\n
+-----END RSA PRIVATE KEY-----"
+  verifier-key: "-----BEGIN PUBLIC KEY-----\n
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDH/j3PlnMCBEItbOmio+9OdYHp\n
+dKXc5Bgevx88Ed3N1YODi/9aqXTbONIzNjkOotqKx8KbC6z06aI5jMS9r1+p5SUg\n
+QyGYCgqYiVujKXm22na/Jy5UOgr0OyEBPczUO2IYBzG95QhPtTx0/5IULXd9LWwK\n
+4yaCtgc3jQ8WR12s+wIDAQAB\n
+-----END PUBLIC KEY-----"

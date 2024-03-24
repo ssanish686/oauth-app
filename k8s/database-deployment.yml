@@ -2,13 +2,11 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: postgres-secret
+  name: postgres-config
   labels:
     app: postgres
 data:
   POSTGRES_DB: oauth-db
-  POSTGRES_USER: oauth-user
-  POSTGRES_PASSWORD: Z%Sdf$3*dsfd90123#Vgt7@544
 
 ---
 # PersistentVolume
@@ -67,7 +65,9 @@ spec:
             - containerPort: 5432
           envFrom:
             - configMapRef:
-                name: postgres-secret
+                name: postgres-config
+            - secretRef:
+                name: oauth-db-secret
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: postgresdata
@@ -76,6 +76,7 @@ spec:
           persistentVolumeClaim:
             claimName: postgres-volume-claim
 ---
+
 apiVersion: v1
 kind: Service
 metadata:
