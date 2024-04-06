@@ -55,6 +55,8 @@ The actuator can be accessed via below link.
 
    `kubectl create secret generic <secret name> --from-literal=POSTGRES_USER=<db user name> --from-literal=POSTGRES_PASSWORD=<db password>`
 
+   `Example: kubectl create secret generic oauth-db-secret --from-literal=POSTGRES_USER=oauth-user --from-literal=POSTGRES_PASSWORD=123456`
+
 2. #### Run below command in **k8s** folder to deploy postgres.  
 
    `kubectl apply -f database-deployment.yml`
