@@ -1,11 +1,8 @@
 package com.anish.config;
 
-import com.anish.service.security.UserServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -20,18 +17,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Autowired
-	private UserServiceImpl customDetailsService;
-
 	@Bean
 	public PasswordEncoder encoder() {
 		return new BCryptPasswordEncoder();
-	}
-
-	@Override
-	@Autowired
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(customDetailsService).passwordEncoder(encoder());
 	}
 
 	@Override
@@ -50,6 +38,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring()
-				.antMatchers("/actuator/**", "/h2-console/**");
+				.antMatchers("/actuator/**");
 	}
 }

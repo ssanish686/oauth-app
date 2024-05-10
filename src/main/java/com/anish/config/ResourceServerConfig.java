@@ -4,7 +4,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
-import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * @author anishkumarss
@@ -13,23 +14,23 @@ import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHand
  */
 @Configuration
 @EnableResourceServer
-public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
-
-	private static final String ADMIN_SCOPE = "#oauth2.hasScope('admin')";
-	private static final String PRIVILEGED_CLIENT_PATTERN = "/privileged-client/**";
+public class ResourceServerConfig extends ResourceServerConfigurerAdapter implements WebMvcConfigurer {
 	private static final String PUBLIC_URL = "/public/**";
-	/*
-	 * private static final String RESOURCE_ID = "resource_id";
-	 * 
-	 * @Override public void configure(ResourceServerSecurityConfigurer resources) {
-	 * resources.resourceId(RESOURCE_ID).stateless(false); }
-	 */
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http.requestMatchers()
-				.antMatchers(PRIVILEGED_CLIENT_PATTERN, PUBLIC_URL).and().authorizeRequests()
-				.antMatchers(PRIVILEGED_CLIENT_PATTERN).access(ADMIN_SCOPE);
+		http.cors().and().authorizeRequests()
+				.antMatchers(PUBLIC_URL).permitAll()
+				.anyRequest().authenticated();
+	}
+
+	@Override
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/**")
+				.allowedMethods("GET")
+				.allowedHeaders("*")
+				.allowedOrigins("*")
+				.exposedHeaders("Access-Control-Allow-Origin");
 	}
 
 }

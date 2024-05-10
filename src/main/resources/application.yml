@@ -16,51 +16,48 @@ spring:
   config:
     activate:
       on-profile: local
-  datasource:
-    url: jdbc:h2:mem:localdb
-    username: sa
-    password:
-  h2:
-    console:
-      enabled: true
-  jpa:
-    hibernate:
-      ddl-auto: validate
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        format_sql: true
-admin:
+api:
   client:
-    id: local-admin
-    secret: $2a$10$5lI9OvVh27q7Bkn7hg2Tv.GCTPHwJGJT1yQ2jBJmqVgrF2Az/AeBu
-user:
-  client:
-    id: local-user
-    secret: $2a$10$fd3Te4dtTlCpdDS6owliY.Xhae4vbp/mYvEoR5mZNP93lKUqGPPRq
+    id: local-api
+    secret: $2a$12$LszmWKHfIWSjjJWq7onBIOnzcY0fi06J0dzRkZt27DOiQrqXnjjIq
 jwt:
   signing-key: "-----BEGIN RSA PRIVATE KEY-----\n
-MIICXAIBAAKBgQDH/j3PlnMCBEItbOmio+9OdYHpdKXc5Bgevx88Ed3N1YODi/9a\n
-qXTbONIzNjkOotqKx8KbC6z06aI5jMS9r1+p5SUgQyGYCgqYiVujKXm22na/Jy5U\n
-Ogr0OyEBPczUO2IYBzG95QhPtTx0/5IULXd9LWwK4yaCtgc3jQ8WR12s+wIDAQAB\n
-AoGAGHfAdC9B7tM6jXgvtVg9JOo3dKpyyG2XjdtwJNdCvbYLmwJ7wUnOJCv1e5J8\n
-tI+0ERqTcoihJm2XDVdtko9sMpN9qT3i0EGIxMwV81cUrQt+EfsOEf6LEwgkLkh/\n
-OPr4yUed3TLwIHMFG21Azg65UIyrqsnHtSuz+DwoZgitH2ECQQDxM0ObUoBnEYqX\n
-BUfvN6hTB9+hLcxTN1i+MoNpS4QOqmSiL8z+P2gzIh1YIaps4AdagCLcQIn15RIr\n
-+9+oJB7ZAkEA1EOzzUp1TYAZmuTm6YsKX3y/LRzJJKtT3cNPo+0ejVbzTUfGF5ew\n
-z4LMDXlf/1GPjvix5PmLkzS67TguGEJt8wJBAO6rDF3YUCgsyldPqXODPnMSmm1x\n
-1PoPDSf+8duyFrUwVC3MYOrAMUpPmnvHrEzZjU0298e7sQf5KHcPX6uQOlkCQE5n\n
-H2+xk/hnW43SBNS4rcEtY7P3EPjBa73a2XzUJdfRCRc/bpTiS8WqK1LCxUmaR6to\n
-gtTvs7VQ4cajXKtLRi8CQBmKoB5yDMJnqcsi3woGwoUyfcIVLC82dsw0w3RJSk0k\n
-cgAduBLaCe5VoCHq+ew4RME7n6WavEzH6wZ5FrOh1jI=\n
+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\n
 -----END RSA PRIVATE KEY-----"
   verifier-key: "-----BEGIN PUBLIC KEY-----\n
-MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDH/j3PlnMCBEItbOmio+9OdYHp\n
-dKXc5Bgevx88Ed3N1YODi/9aqXTbONIzNjkOotqKx8KbC6z06aI5jMS9r1+p5SUg\n
-QyGYCgqYiVujKXm22na/Jy5UOgr0OyEBPczUO2IYBzG95QhPtTx0/5IULXd9LWwK\n
-4yaCtgc3jQ8WR12s+wIDAQAB\n
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArfITofqz9gETCBe/03ET\n
+1N2EHKUo7rtzrqmOmpCgFfQw5GWKiob0wyzNyACmhGvPlsNfk8MmpDcJR8xxRioo\n
++nf6Wo9/wS07VRzaCvQ8Vg8L6JTNwAmJQxHQNVs+zMopjUnXAwhASQkCoJSL1FNu\n
+3Xc7sghbIzLsnvd8uXHY+fXi9ok145HZsMrClTLiCCXtXu7gqfU63blAcdB5b18I\n
+meYYD/WnCbhqeygo7jMSuF13P8M9bneBeFaPE/euqUvHiWXqsabF2z1b5xadAvTQ\n
+5iViUPPQ8OAb8+ri8WCYssg1wtaowfV7AFirBJCGpdti4PcSj4gbezgohhZiwyap\n
+oQIDAQAB\n
 -----END PUBLIC KEY-----"
-
+  issuer : http://localhost:8080
 
 ---
 
@@ -68,22 +65,10 @@ spring:
   config:
     activate:
       on-profile: dev
-  datasource:
-    url: ${DATABASE_URL}
-    username: ${DATABASE_USERNAME}
-    password: ${DATABASE_PASSWORD}
-  jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-admin:
+api:
   client:
-    id: dev-admin
+    id: dev-api
     secret: $2a$10$5lI9OvVh27q7Bkn7hg2Tv.GCTPHwJGJT1yQ2jBJmqVgrF2Az/AeBu
-user:
-  client:
-    id: dev-user
-    secret: $2a$10$fd3Te4dtTlCpdDS6owliY.Xhae4vbp/mYvEoR5mZNP93lKUqGPPRq
 jwt:
   signing-key: ${OAUTH_SIGNING_KEY}
   verifier-key: ${OAUTH_VERIFIER_KEY}
@@ -94,22 +79,10 @@ spring:
   config:
     activate:
       on-profile: prod
-  datasource:
-    url: ${DATABASE_URL}
-    username: ${DATABASE_USERNAME}
-    password: ${DATABASE_PASSWORD}
-  jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-admin:
+api:
   client:
-    id: admin
+    id: user-api
     secret: $2a$12$hJOEPAx7rPJvqsrPIscjQOwkP.d1OH//EGYo3lq6Gqx57hYbJ.Xdy
-user:
-  client:
-    id: user
-    secret: $2a$10$fd3Te4dtTlCpdDS6owliY.Xhae4vbp/mYvEoR5mZNP93lKUqGPPRq
 jwt:
   signing-key: ${OAUTH_SIGNING_KEY}
   verifier-key: ${OAUTH_VERIFIER_KEY}
