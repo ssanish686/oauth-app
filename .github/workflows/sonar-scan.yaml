@@ -26,6 +26,8 @@ jobs:
         args: >
           -Dsonar.organization=ssanish686
           -Dsonar.projectKey=oauth-app
+          -Dsonar.sources=src/main/java/
+          -Dsonar.java.binaries=target/classes
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
