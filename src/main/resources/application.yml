@@ -1,64 +1,20 @@
-security:
-  oauth2:
-    resource:
-      filter-order: 3
-debug: true
-management:
-  server:
-    port: 9001
-  endpoints:
-    web:
-      exposure:
-        include: "*"
----
-
 spring:
   config:
     activate:
       on-profile: local
-api:
-  client:
-    id: local-api
-    secret: $2a$12$LszmWKHfIWSjjJWq7onBIOnzcY0fi06J0dzRkZt27DOiQrqXnjjIq
-jwt:
-  signing-key: "-----BEGIN RSA PRIVATE KEY-----\n
-MIIEpAIBAAKCAQEArfITofqz9gETCBe/03ET1N2EHKUo7rtzrqmOmpCgFfQw5GWK\n
-iob0wyzNyACmhGvPlsNfk8MmpDcJR8xxRioo+nf6Wo9/wS07VRzaCvQ8Vg8L6JTN\n
-wAmJQxHQNVs+zMopjUnXAwhASQkCoJSL1FNu3Xc7sghbIzLsnvd8uXHY+fXi9ok1\n
-45HZsMrClTLiCCXtXu7gqfU63blAcdB5b18ImeYYD/WnCbhqeygo7jMSuF13P8M9\n
-bneBeFaPE/euqUvHiWXqsabF2z1b5xadAvTQ5iViUPPQ8OAb8+ri8WCYssg1wtao\n
-wfV7AFirBJCGpdti4PcSj4gbezgohhZiwyapoQIDAQABAoIBAQCDpMTE/xa5pKCB\n
-rG+qF1c575fvkfODkeyAEKTzR2dQlil2gX6zTmXpXHw01IExkOJfqGcqTjRtbZWh\n
-eBF2V6wBu1GGvjmiupe/14ERbzxGqUaK9CsvHkh6sP2RlAfYN1vxKSQHkHQOkjoh\n
-y6pzu90Y0Qcluvs2jXDU8lq7gnUC3pwd2zmOZTcXSrT7CKZ/Z6sxwRErF2n1Ld20\n
-EmqIhdLoagYHK22vQU1EaXv0fJWWItZIxsAJYIgwMbkUwGFwRbMkCJ4NWF+/MurC\n
-bG+bj1bedMNeXPu7jdWycoun3xiwIRRZlHL2Z2P/pG7AmYDKDKDULjx5qfpXtEFk\n
-2VzyemVBAoGBANnwk8K9Anio8I4ikrmfCeVKi44kg/rVwcLaAQujOG+R1zXEh5Lb\n
-5q73RtSuFA+ygAfVPjA8SCqngMn55FDXZOAH4aLP9n8yCoxzH31BRSAtjvHkY4IV\n
-AyvOuR2LPdTNtC3fYEJ1bJb9P9MXSwVnlhIiyPXJmGwzAwW0X6BzzFWZAoGBAMxS\n
-p8TJAs+kU4RSWSEQzWZYXLioxjd8Z1AUhO5uF8RRoQbM2X+exXNpddYEtfDge+Xv\n
-HFFHgkT9XjXAg0O4dfNCgfZ/Nk5/hZ63o/lMjx1SsCoZc/9PBBdS8Ehkm/ubE0ug\n
-4Frl8JtYO2WfV+yCeKVmrGss325yPnjztphMCulJAoGAfQDmX641uqt7vqrJ6bn0\n
-3RVS0mbTZI4youaT7u7hsey+udJNyMhkmjqu39IxI4fIs7V2BAivg/ergS3Z7Rx+\n
-eZlLrC0IP5CeSEzH5PoJAhnfgZL0GGqg9QGPYAi7oFGUZTNYbQYZEMmVUChuGV1+\n
-0EwvY/sLeBQSSbVZnBiPPRECgYEAojsuwmzoMn5DYdkQs9Rngk++r1AysnOwhEEG\n
-m1oGvPYjaQbV2yLxnAWsblYnMC7NsW/9h/vDT4vtdbh5gRfBb3jrQBEZyZIvQiqF\n
-o7hKGfpBreuv0pOmp+5OouxffZNP6si92u6f8HhKERJH+Z5OtOWlGSPz8/n56Id5\n
-/8rBDyECgYBjsGgwib3GefUV/oy6M1eZ5o6f9PAemRsj27v+YReM/btvzzFtcGOy\n
-UnT1PJp4cQBhGsPzLjBkH3vjQtIvfNlO3H9ofvj5Z1eiLsuu4KZ7CXmPlgGlWgj4\n
-2LMTCiLNMHaxRxjsYjgDoCj6KeXF9QO/9IaeBnRE+DWsbZG00Dg0yA==\n
------END RSA PRIVATE KEY-----"
-  verifier-key: "-----BEGIN PUBLIC KEY-----\n
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArfITofqz9gETCBe/03ET\n
-1N2EHKUo7rtzrqmOmpCgFfQw5GWKiob0wyzNyACmhGvPlsNfk8MmpDcJR8xxRioo\n
-+nf6Wo9/wS07VRzaCvQ8Vg8L6JTNwAmJQxHQNVs+zMopjUnXAwhASQkCoJSL1FNu\n
-3Xc7sghbIzLsnvd8uXHY+fXi9ok145HZsMrClTLiCCXtXu7gqfU63blAcdB5b18I\n
-meYYD/WnCbhqeygo7jMSuF13P8M9bneBeFaPE/euqUvHiWXqsabF2z1b5xadAvTQ\n
-5iViUPPQ8OAb8+ri8WCYssg1wtaowfV7AFirBJCGpdti4PcSj4gbezgohhZiwyap\n
-oQIDAQAB\n
------END PUBLIC KEY-----"
-  issuer : http://localhost:8080
-
+  security:
+    oauth2:
+      authorization-server:
+        issuer: http://localhost:8080
+        client:
+          api-client:
+            registration:
+              client-id: local-api
+              client-secret: "{noop}api123"
+              client-authentication-methods: client_secret_basic
+              authorization-grant-types: client_credentials
+            token:
+              access-token-time-to-live: 36000s
 ---
 
 spring:

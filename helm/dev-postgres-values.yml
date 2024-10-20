@@ -1,7 +1,0 @@
-postgres:
-  config:
-    data:
-      - key: POSTGRES_DB
-        value: oauth-db
-  secret:
-    name: oauth-db-secret
