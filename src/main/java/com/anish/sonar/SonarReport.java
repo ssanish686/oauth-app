@@ -5,8 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SonarReport {
 
-    public String testSonar(){
-        String response = "test sonar..";
+    public String getSonarStatus(){
+        String response = "Passed";
         log.info(response);
         return response;
     }
